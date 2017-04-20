@@ -23,7 +23,7 @@ define(['exports', 'immutable'], function (exports, _immutable) {
     store = aurelia.container.get(storeInstance);
   };
 
-  var connect = function connect(viewModel, stateMapper) {
+  var connect = function connect(viewModel, stateMapper, mapByKey = false) {
     stateMapper = stateMapper || function (state) {
       return state;
     };
@@ -32,7 +32,7 @@ define(['exports', 'immutable'], function (exports, _immutable) {
     var stateToShallowCompare = void 0;
 
     var inject = function inject(mappedState) {
-      if (!viewModel.state) {
+      if (!mapByKey || !viewModel.state) {
         viewModel.state = mappedState;
       } else {
         Object.keys(mappedState).forEach(function(key, index) {
