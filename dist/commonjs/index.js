@@ -20,7 +20,7 @@ var configure = function configure(aurelia, storeInstance) {
   store = aurelia.container.get(storeInstance);
 };
 
-var connect = function connect(viewModel, stateMapper) {
+var connect = function connect(viewModel, stateMapper, mapByKey = false) {
   stateMapper = stateMapper || function (state) {
     return state;
   };
@@ -29,7 +29,7 @@ var connect = function connect(viewModel, stateMapper) {
   var stateToShallowCompare = void 0;
 
   var inject = function inject(mappedState) {
-    if (!viewModel.state) {
+    if (!mapByKey || !viewModel.state) {
       viewModel.state = mappedState;
     } else {
       Object.keys(mappedState).forEach(function(key, index) {
