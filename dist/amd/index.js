@@ -32,7 +32,14 @@ define(['exports', 'immutable'], function (exports, _immutable) {
     var stateToShallowCompare = void 0;
 
     var inject = function inject(mappedState) {
-      viewModel.state = mappedState;
+      if (!viewModel.state) {
+        viewModel.state = mappedState;
+      } else {
+        Object.keys(mappedState).forEach(function(key, index) {
+          viewModel.state[key] = mappedState[key];
+        });
+      }
+      
       viewModel.dispatch = dispatch;
 
       stateToShallowCompare = (0, _immutable.fromJS)(viewModel.state);
