@@ -35,7 +35,14 @@ System.register(['immutable'], function (_export, _context) {
         var stateToShallowCompare = void 0;
 
         var inject = function inject(mappedState) {
-          viewModel.state = mappedState;
+          if (!viewModel.state) {
+            viewModel.state = mappedState;
+          } else {
+            Object.keys(mappedState).forEach(function(key, index) {
+              viewModel.state[key] = mappedState[key];
+            });
+          }
+          
           viewModel.dispatch = dispatch;
 
           stateToShallowCompare = fromJS(viewModel.state);
