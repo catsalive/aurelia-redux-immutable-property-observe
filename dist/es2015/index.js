@@ -11,14 +11,14 @@ const configure = (aurelia, storeInstance) => {
   store = aurelia.container.get(storeInstance);
 };
 
-const connect = (viewModel, stateMapper) => {
+const connect = (viewModel, stateMapper, mapByKey = false) => {
   stateMapper = stateMapper || (state => state);
   const state = store.getState();
   const dispatch = store.dispatch;
   let stateToShallowCompare;
 
   const inject = mappedState => {
-    if (!viewModel.state) {
+    if (!mapByKey || !viewModel.state) {
       viewModel.state = mappedState;
     } else {
       Object.keys(mappedState).forEach(function(key, index) {
