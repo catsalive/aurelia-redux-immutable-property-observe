@@ -1,4 +1,6 @@
-# Aurelia-Redux-Immutable
+# Aurelia-Redux-Immutable-Property-Observe
+
+This is a clone of kamilglod's aurelia-redux repo - THANK YOU SIR! But I changed the connect function to deal with state properties individually rather than just updating the state all at once - this lets me use observerlocator to listen to property changes.
 
 Aurelia plugin for redux is auto inject state and dispatcher to view models. Additionally it keeps synced redux state in view models so it will be auto updated when change occurred.
 
