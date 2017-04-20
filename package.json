@@ -1,6 +1,6 @@
 {
-  "name": "aurelia-redux-immutable",
-  "version": "0.0.8",
+  "name": "aurelia-redux-immutable-property-observe",
+  "version": "0.0.9",
   "description": "TBD.",
   "keywords": [
     "aurelia",
@@ -9,11 +9,11 @@
   ],
   "homepage": "http://aurelia.io",
   "license": "CC0-1.0",
-  "author": "Kamil Glod",
+  "author": "Griffith Thomas",
   "main": "dist/commonjs/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kamilglod/aurelia-redux"
+    "url": "https://github.com/catsalive/aurelia-redux-immutable-property-observe"
   },
   "devDependencies": {
     "aurelia-tools": "^0.2.4",
