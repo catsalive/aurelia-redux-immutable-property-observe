@@ -26,7 +26,7 @@ System.register(['immutable'], function (_export, _context) {
         store = aurelia.container.get(storeInstance);
       });
 
-      connect = function connect(viewModel, stateMapper) {
+      connect = function connect(viewModel, stateMapper, mapByKey = false) {
         stateMapper = stateMapper || function (state) {
           return state;
         };
@@ -35,7 +35,7 @@ System.register(['immutable'], function (_export, _context) {
         var stateToShallowCompare = void 0;
 
         var inject = function inject(mappedState) {
-          if (!viewModel.state) {
+          if (!mapByKey || !viewModel.state) {
             viewModel.state = mappedState;
           } else {
             Object.keys(mappedState).forEach(function(key, index) {
