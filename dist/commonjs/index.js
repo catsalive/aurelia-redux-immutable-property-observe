@@ -48,7 +48,7 @@ var connect = function connect(viewModel, stateMapper, mapByKey = false) {
     }
   };
   var unsubscribe = store.subscribe(subscribe);
-  var originalDetached = viewModel.detached || function () {};
+  var originalDetached = (viewModel.detached && viewModel.detached.bind(viewModel)) || function () {};
   viewModel.detached = function () {
     originalDetached();
     unsubscribe();
