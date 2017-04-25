@@ -51,7 +51,7 @@ define(['exports', 'immutable'], function (exports, _immutable) {
       }
     };
     var unsubscribe = store.subscribe(subscribe);
-    var originalDetached = viewModel.detached || function () {};
+    var originalDetached = (viewModel.detached && viewModel.detached.bind(viewModel)) || function () {};
     viewModel.detached = function () {
       originalDetached();
       unsubscribe();
