@@ -20,7 +20,7 @@ var configure = function configure(aurelia, storeInstance) {
   store = aurelia.container.get(storeInstance);
 };
 
-var connect = function connect(viewModel, stateMapper, mapByKey = false) {
+var connect = function connect(viewModel, stateMapper, mapByKey) {
   stateMapper = stateMapper || function (state) {
     return state;
   };
