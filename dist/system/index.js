@@ -26,7 +26,7 @@ System.register(['immutable'], function (_export, _context) {
         store = aurelia.container.get(storeInstance);
       });
 
-      connect = function connect(viewModel, stateMapper, mapByKey = false) {
+      connect = function connect(viewModel, stateMapper, mapByKey) {
         stateMapper = stateMapper || function (state) {
           return state;
         };
