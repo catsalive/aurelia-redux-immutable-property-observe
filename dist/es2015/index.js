@@ -11,7 +11,7 @@ const configure = (aurelia, storeInstance) => {
   store = aurelia.container.get(storeInstance);
 };
 
-const connect = (viewModel, stateMapper, mapByKey = false) => {
+const connect = (viewModel, stateMapper, mapByKey) => {
   stateMapper = stateMapper || (state => state);
   const state = store.getState();
   const dispatch = store.dispatch;
