@@ -7,7 +7,7 @@ exports.configure = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _immutable = require('immutable');
+var _ = require('lodash');
 
 var store = void 0;
 
@@ -33,17 +33,17 @@ var connect = function connect(viewModel, stateMapper, mapByKey) {
       viewModel.state = mappedState;
     } else {
       Object.keys(mappedState).forEach(function(key, index) {
-        viewModel.state[key] = mappedState[key];
+        viewModel[key] = mappedState[key];
       });
     }
     
     viewModel.dispatch = dispatch;
 
-    stateToShallowCompare = (0, _immutable.fromJS)(viewModel.state);
+    stateToShallowCompare = mappedState;
   };
   var subscribe = function subscribe() {
     var newMappedState = stateMapper(store.getState());
-    if (!stateToShallowCompare.equals((0, _immutable.fromJS)(newMappedState))) {
+    if (!_.isEqual(stateToShallowCompare, newMappedState)) {
       inject(newMappedState);
     }
   };
