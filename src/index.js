@@ -1,4 +1,4 @@
-import { fromJS } from 'immutable';
+import * as _ from 'lodash';
 
 let store;
 
@@ -22,17 +22,17 @@ const connect = (viewModel, stateMapper, mapByKey) => {
       viewModel.state = mappedState;
     } else {
       Object.keys(mappedState).forEach(function(key, index) {
-        viewModel.state[key] = mappedState[key];
+        viewModel[key] = mappedState[key];
       });
     }
     
     viewModel.dispatch = dispatch;
 
-    stateToShallowCompare = fromJS(viewModel.state);
+    stateToShallowCompare = mappedState;
   };
   const subscribe = () => {
     const newMappedState = stateMapper(store.getState());
-    if (!stateToShallowCompare.equals(fromJS(newMappedState))) {
+    if (!_.isEqual(stateToShallowCompare, newMappedState)) {
       inject(newMappedState);
     }
   };
