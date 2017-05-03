@@ -32,7 +32,7 @@ define(['exports', 'lodash'], function (exports, _) {
     var stateToShallowCompare = void 0;
 
     var inject = function inject(mappedState) {
-      if (!mapByKey || !viewModel.state) {
+      if (!mapByKey) {
         viewModel.state = mappedState;
       } else {
         Object.keys(mappedState).forEach(function(key, index) {
@@ -42,7 +42,7 @@ define(['exports', 'lodash'], function (exports, _) {
       
       viewModel.dispatch = dispatch;
 
-      stateToShallowCompare = mappedState;
+      stateToShallowCompare = Object.assign({}, mappedState);
     };
     var subscribe = function subscribe() {
       var newMappedState = stateMapper(store.getState());
