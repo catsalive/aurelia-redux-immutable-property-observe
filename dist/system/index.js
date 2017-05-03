@@ -1,13 +1,13 @@
 'use strict';
 
-System.register(['immutable'], function (_export, _context) {
+System.register(['lodash'], function (_export, _context) {
   "use strict";
 
   var fromJS, _typeof, store, configure, connect;
 
   return {
-    setters: [function (_immutable) {
-      fromJS = _immutable.fromJS;
+    setters: [function (_lodash) {
+      _ = _lodash._;
     }],
     execute: function () {
       _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
@@ -39,17 +39,17 @@ System.register(['immutable'], function (_export, _context) {
             viewModel.state = mappedState;
           } else {
             Object.keys(mappedState).forEach(function(key, index) {
-              viewModel.state[key] = mappedState[key];
+              viewModel[key] = mappedState[key];
             });
           }
           
           viewModel.dispatch = dispatch;
 
-          stateToShallowCompare = fromJS(viewModel.state);
+          stateToShallowCompare = mappedState;
         };
         var subscribe = function subscribe() {
           var newMappedState = stateMapper(store.getState());
-          if (!stateToShallowCompare.equals(fromJS(newMappedState))) {
+          if (!_.isEqual(stateToShallowCompare, newMappedState)) {
             inject(newMappedState);
           }
         };
