@@ -18,7 +18,7 @@ const connect = (viewModel, stateMapper, mapByKey) => {
   let stateToShallowCompare;
 
   const inject = (mappedState) => {
-    if (!mapByKey || !viewModel.state) {
+    if (!mapByKey) {
       viewModel.state = mappedState;
     } else {
       Object.keys(mappedState).forEach(function(key, index) {
@@ -28,7 +28,7 @@ const connect = (viewModel, stateMapper, mapByKey) => {
     
     viewModel.dispatch = dispatch;
 
-    stateToShallowCompare = mappedState;
+    stateToShallowCompare = Object.assign({}, mappedState);
   };
   const subscribe = () => {
     const newMappedState = stateMapper(store.getState());
