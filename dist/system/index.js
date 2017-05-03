@@ -35,7 +35,7 @@ System.register(['lodash'], function (_export, _context) {
         var stateToShallowCompare = void 0;
 
         var inject = function inject(mappedState) {
-          if (!mapByKey || !viewModel.state) {
+          if (!mapByKey) {
             viewModel.state = mappedState;
           } else {
             Object.keys(mappedState).forEach(function(key, index) {
@@ -45,7 +45,7 @@ System.register(['lodash'], function (_export, _context) {
           
           viewModel.dispatch = dispatch;
 
-          stateToShallowCompare = mappedState;
+          stateToShallowCompare = Object.assign({}, mappedState);
         };
         var subscribe = function subscribe() {
           var newMappedState = stateMapper(store.getState());
