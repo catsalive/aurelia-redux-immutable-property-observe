@@ -1,4 +1,4 @@
-define(['exports', 'immutable'], function (exports, _immutable) {
+define(['exports', 'lodash'], function (exports, _) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -36,17 +36,17 @@ define(['exports', 'immutable'], function (exports, _immutable) {
         viewModel.state = mappedState;
       } else {
         Object.keys(mappedState).forEach(function(key, index) {
-          viewModel.state[key] = mappedState[key];
+          viewModel[key] = mappedState[key];
         });
       }
       
       viewModel.dispatch = dispatch;
 
-      stateToShallowCompare = (0, _immutable.fromJS)(viewModel.state);
+      stateToShallowCompare = mappedState;
     };
     var subscribe = function subscribe() {
       var newMappedState = stateMapper(store.getState());
-      if (!stateToShallowCompare.equals((0, _immutable.fromJS)(newMappedState))) {
+      if (!_.isEqual(stateToShallowCompare, newMappedState)) {
         inject(newMappedState);
       }
     };
