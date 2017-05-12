@@ -20,7 +20,8 @@ var configure = function configure(aurelia, storeInstance) {
   store = aurelia.container.get(storeInstance);
 };
 
-var connect = function connect(viewModel, stateMapper, mapByKey) {
+var connect = function connect(viewModel, stateMapper, mapByKeyLevel) {
+  if (typeof mapByKeyLevel !== 'number') { throw new Error('mayByKeyLevel must be a number'); }
   stateMapper = stateMapper || function (state) {
     return state;
   };
@@ -29,11 +30,17 @@ var connect = function connect(viewModel, stateMapper, mapByKey) {
   var stateToShallowCompare = void 0;
 
   var inject = function inject(mappedState) {
-    if (!mapByKey) {
+    if (!mapByKeyLevel) {
       viewModel.state = mappedState;
     } else {
       Object.keys(mappedState).forEach(function(key, index) {
-        viewModel[key] = mappedState[key];
+        if (mapByKeyLevel > 1 && typeof mappedState[key] === 'object' && typeof viewModel[key] === 'object' && mappedState[key] !== null && viewModel[key] !== null) {
+          Object.keys(viewModel[key]).concat(Object.keys(mappedState[key])).filter((value, ix, array) => array.indexOf(value) === ix).forEach((k) => {
+            viewModel[key][k] = mappedState[key][k];
+          });
+        } else {
+          viewModel[key] = mappedState[key];
+        }
       });
     }
     
