@@ -12,7 +12,7 @@ const configure = (aurelia, storeInstance) => {
 };
 
 const connect = (viewModel, stateMapper, mapByKeyLevel) => {
-  if (typeof mapByKeyLevel !== 'number') { throw new Error('mayByKeyLevel must be a number'); }
+  if (typeof mapByKeyLevel !== 'number' && typeof mapByKeyLevel !== 'undefined') { throw new Error('mayByKeyLevel must be a number'); }
   stateMapper = stateMapper || (state => state);
   const state = store.getState();
   const dispatch = store.dispatch;
