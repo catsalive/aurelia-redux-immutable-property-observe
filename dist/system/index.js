@@ -27,7 +27,7 @@ System.register(['lodash'], function (_export, _context) {
       });
 
       connect = function connect(viewModel, stateMapper, mapByKeyLevel) {
-        if (typeof mapByKeyLevel !== 'number') { throw new Error('mayByKeyLevel must be a number'); }
+        if (typeof mapByKeyLevel !== 'number' && typeof mapByKeyLevel !== 'undefined') { throw new Error('mayByKeyLevel must be a number'); }
         stateMapper = stateMapper || function (state) {
           return state;
         };
