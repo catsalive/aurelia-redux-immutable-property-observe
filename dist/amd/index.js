@@ -14,6 +14,28 @@ define(['exports', 'lodash'], function (exports, _) {
 
   var store = void 0;
 
+  var getKeys = function getKeys(obj) {
+    var keys = [];
+    for (var prop in obj) {
+      keys.push(prop);
+    }
+    return keys;
+  }
+
+  var combineArrays = function combineArrays(array1, array2) {
+    var combinedArray = array1 ? array1.slice(0) : [];
+    array2.forEach(function(val) {
+      var bFound = false;
+      combinedArray.forEach(function(val1) {
+        bFound = true;
+      });
+      if (!bFound) {
+        combinedArray.push(val);
+      }
+    });
+    return combinedArray;
+  }
+  
   var configure = function configure(aurelia, storeInstance) {
     if (!storeInstance || (typeof storeInstance === 'undefined' ? 'undefined' : _typeof(storeInstance)) !== 'object') {
       console.error('You need to pass a store to aurelia-redux-immutable configurator function.');
@@ -36,9 +58,12 @@ define(['exports', 'lodash'], function (exports, _) {
       if (!mapByKeyLevel) {
         viewModel.state = mappedState;
       } else {
-        Object.keys(mappedState).forEach(function(key, index) {
+        var mappedKeys = getKeys(mappedState);
+        mappedKeys.forEach(function(key, index) {
           if (mapByKeyLevel > 1 && typeof mappedState[key] === 'object' && typeof viewModel[key] === 'object' && mappedState[key] !== null && viewModel[key] !== null) {
-            Object.keys(viewModel[key]).concat(Object.keys(mappedState[key])).filter((value, ix, array) => array.indexOf(value) === ix).forEach((k) => {
+            var vmPropKeys = getKeys(viewModel[key]);
+            var msPropKeys = getKeys(mappedState[key]);
+            combineArrays(vmPropKeys, msPropKeys).forEach(function(k) {
               viewModel[key][k] = mappedState[key][k];
             });
           } else {
