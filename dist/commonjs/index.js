@@ -49,6 +49,7 @@ var connect = function connect(viewModel, stateMapper, mapByKeyLevel) {
   };
   var state = store.getState();
   var dispatch = store.dispatch;
+  var getState = store.getState;
   var stateToShallowCompare = void 0;
 
   var inject = function inject(mappedState) {
@@ -70,6 +71,7 @@ var connect = function connect(viewModel, stateMapper, mapByKeyLevel) {
     }
     
     viewModel.dispatch = dispatch;
+    viewModel.getState = getState;
 
     stateToShallowCompare = Object.assign({}, mappedState);
   };
